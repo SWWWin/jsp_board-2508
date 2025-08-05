@@ -1,0 +1,1 @@
+rootProject.name = "p-calculrator-1"
