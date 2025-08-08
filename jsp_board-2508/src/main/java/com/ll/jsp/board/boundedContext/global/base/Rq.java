@@ -1,4 +1,4 @@
-package com.ll.jsp.board;
+package com.ll.jsp.board.boundedContext.global.base;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
