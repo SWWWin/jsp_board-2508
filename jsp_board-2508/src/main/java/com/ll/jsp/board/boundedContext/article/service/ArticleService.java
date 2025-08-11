@@ -22,4 +22,10 @@ public class ArticleService {
         long id = articleRepository.write(title, content);
         return id;
     }
+
+
+    public Article findById(int id) {
+
+        return articleRepository.findById(id);
+    }
 }

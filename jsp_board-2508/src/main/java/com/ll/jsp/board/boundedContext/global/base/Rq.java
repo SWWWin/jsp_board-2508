@@ -30,9 +30,9 @@ public class Rq {
     }
 
     public int getIntParam(String paramName, int defaultValue) {
-        String value = getParam(paramName, "");
+        String value = getParam(paramName, null);
 
-        if (value == null) {
+        if (value == null || value.isEmpty()) {
             return defaultValue;
         }
 
@@ -42,6 +42,7 @@ public class Rq {
             return defaultValue;
         }
     }
+
 
     public String getParam(String paramName, String defaultValue) {
         String value = req.getParameter(paramName);
@@ -93,6 +94,6 @@ public class Rq {
     public String getActionPath() {
         String[] bits = req.getRequestURI().split("/");
 
-        return "/%s/%s/%s".formatted(bits[0], bits[1], bits[2]);
+        return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
     }
 }
