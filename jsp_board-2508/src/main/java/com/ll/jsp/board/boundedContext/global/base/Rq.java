@@ -96,4 +96,24 @@ public class Rq {
 
         return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
     }
+
+    public long getLongPathValueIndex(int index, int defaultValue) {
+        String value = getPathValueIndex(index, null);
+
+        if(value == null) {
+            return defaultValue;
+        } else {
+            return Long.parseLong(value);
+        }
+    }
+
+    public String getPathValueIndex(int index, String defaultValue) {
+        String[] bits = req.getRequestURI().split("/");
+
+        try{
+            return bits[3 + index];
+        } catch(ArrayIndexOutOfBoundsException e) {
+            return defaultValue;
+        }
+    }
 }

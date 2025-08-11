@@ -9,10 +9,6 @@ public class MemberController {
 
     }
 
-    public void showDetail(Rq rq) {
-        int id = rq.getIntParam("id", 0);
 
-        articleService.findById(id);
-    }
 
 }

@@ -72,7 +72,7 @@ public class ArticleController {
 
 
     public void showDetail(Rq rq) {
-        int id = rq.getIntParam("id", 0);
+        long id = rq.getLongPathValueIndex(1,0);
 
         if (id <= 0) {
             rq.appendBody("""
