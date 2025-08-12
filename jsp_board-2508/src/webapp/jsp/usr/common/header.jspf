@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:set var="isLogined" value="${sessionScope.loggedInUser != null}" />
+
+<c:if test="${isLogined}">
+    <div>
+        <span>${sessionScope.loggedInUser.username} 님 로그인됨</span>
+        <a href="#" id="logoutLinkBtn">로그아웃</a>
+        <form id="logoutForm" action="/usr/member/logout" method="POST"></form>
+    </div>
+</c:if>
+<c:if test="${!isLogined}">
+    <a href="/usr/member/login">로그인</a>
+</c:if>
+
+<script>
+    const logoutLinkBtn = document.getElementById("logoutLinkBtn");
+    const logoutForm = document.getElementById("logoutForm");
+
+    if (logoutLinkBtn) {
+        logoutLinkBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            if (confirm("로그아웃 하시겠습니까?")) {
+                logoutForm.submit();
+            }
+        });
+    }
+</script>

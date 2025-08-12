@@ -5,6 +5,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,10 +14,12 @@ import java.util.List;
 public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
+    private final HttpSession session;
 
     public Rq(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
         this.resp = resp;
+        this.session = req.getSession();
 
 
         try {
@@ -97,7 +100,7 @@ public class Rq {
         return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
     }
 
-    public long getLongPathValueIndex(int index, int defaultValue) {
+    public long getLongPathValueByIndex(int index, int defaultValue) {
         String value = getPathValueIndex(index, null);
 
         if(value == null) {
@@ -116,4 +119,44 @@ public class Rq {
             return defaultValue;
         }
     }
+
+    public void print(String str) {
+        try {
+            resp.getWriter().print(str);
+        } catch (IOException e) {
+            throw new RuntimeException("응답 작성 중 오류가 발생했습니다.", e);
+        }
+    }
+
+    public void println(String str){
+        print(str + "\n");
+    }
+    public void replace(String msg, String url) {
+        println("""
+                <script>
+                    alert("%s");
+                    location.replace("%s");
+                </script>
+                """.formatted(msg, url));
+    }
+
+    public void historyBack(String msg) {
+        println("""
+                <script>
+                alert("%s");
+                history.back();
+                </script>
+                """.formatted(msg));
+    }
+
+
+    public void setSessionAttr(String attrName, Object value) {
+        session.setAttribute(attrName, value);
+    }
+
+
+    public void removeSessionAttr(String attrName) {
+        session.removeAttribute(attrName);
+    }
 }
+

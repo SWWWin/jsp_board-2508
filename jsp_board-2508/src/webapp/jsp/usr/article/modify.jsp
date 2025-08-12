@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ include file="../common/header.jspf"%>
+
 <script>
     function articleSaveSubmitForm(form) {
 
@@ -30,15 +31,18 @@
 </script>
 
 <div>
-    <h2>게시물 작성</h2>
+    <h2>게시물 수정</h2>
 
+    <div>
+        <span>번호: ${article.id}</span>
+    </div>
     <form method="POST" onsubmit="articleSaveSubmitForm(this); return false;">
         <div>
             <label for="title">제목</label>
             <input type="text"
                    id="title"
                    name="title"
-                   placeholder="제목을 입력해주세요"
+                   placeholder="${article.title}"
                    required>
         </div>
 
@@ -47,7 +51,7 @@
             <textarea id="content"
                       name="content"
                       placeholder="내용을 입력해주세요"
-                      required></textarea>
+                      required>${article.content}</textarea>
         </div>
 
         <div>
@@ -56,4 +60,5 @@
         </div>
     </form>
 </div>
+
 <%@ include file="../common/footer.jspf"%>
